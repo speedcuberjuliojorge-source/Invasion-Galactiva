@@ -45,10 +45,6 @@ public class ElementoGrafico {
         l.dibujo(x, y, imgSprite);
     }
 
-    public void movimiento() {
-
-    }
-
     //Getters y Setters
     public int getX() {
         return x;

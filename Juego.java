@@ -13,7 +13,9 @@ public class Juego {
     private Lienzo canvas;
     private Fondo fondo;
     private NaveRebelde heroe;
-    Entrada teclado;
+    private Entrada teclado;
+    private NaveEnemiga destructor;
+    private int contaDestructor = 0;
 
     //////////METODOS//////////
     //Constructor
@@ -36,6 +38,12 @@ public class Juego {
         //Mover Nave
         teclado = new Entrada();
 
+        //Pintar  3 Destructores
+        while (contaDestructor < 3) {
+            destructor = new Destructor(canvas, heroe);
+            canvas.dibujo(destructor.getPosicionRandomX(), destructor.getPosicionRandomY(), destructor.getImgSprite());
+            contaDestructor++;
+        }
     }
 
     public void mover() throws InterruptedException {
@@ -43,7 +51,7 @@ public class Juego {
             //if (canvas.fuePulsadaTecla(KeyEvent.VK_A)) {
             while (heroe.getX() > (canvas.pideLimiteXMin() + 5)) {
                 sleep(600);//sleep(600) para que la nave recorra la pantalla en 5s
-                teclado.moverIzq(canvas, heroe);
+                getTeclado().moverIzq(canvas, heroe);
                 canvas.dibujo(heroe.getX(), heroe.getY(), heroe.getImgSprite());
             }
             //}
@@ -51,7 +59,7 @@ public class Juego {
             //if (canvas.fuePulsadaTecla(KeyEvent.VK_D)) {
             while (heroe.getX() < (canvas.pideLimiteXMax() - 5)) {
                 sleep(600);//sleep(600) para que la nave recorra la pantalla en 5s
-                teclado.moverDer(canvas, heroe);
+                getTeclado().moverDer(canvas, heroe);
                 canvas.dibujo(heroe.getX(), heroe.getY(), heroe.getImgSprite());
             }
             //}
@@ -73,6 +81,30 @@ public class Juego {
 
     public void setFondo(Fondo fondo) {
         this.fondo = fondo;
+    }
+
+    public Entrada getTeclado() {
+        return teclado;
+    }
+
+    public void setTeclado(Entrada teclado) {
+        this.teclado = teclado;
+    }
+
+    public NaveEnemiga getDestructor() {
+        return destructor;
+    }
+
+    public void setDestructor(NaveEnemiga destructor) {
+        this.destructor = destructor;
+    }
+
+    public int getContaDestructor() {
+        return contaDestructor;
+    }
+
+    public void setContaDestructor(int contaDestructor) {
+        this.contaDestructor = contaDestructor;
     }
 
 }
