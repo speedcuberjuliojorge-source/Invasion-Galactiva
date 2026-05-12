@@ -1,5 +1,6 @@
 
 import edu.epromero.util.Lienzo;
+import java.awt.Color;
 import static java.lang.Thread.sleep;
 //import java.awt.event.KeyEvent;
 
@@ -14,13 +15,14 @@ public class Juego {
     private Fondo fondo;
     private NaveRebelde heroe;
     private Entrada teclado;
-    private NaveEnemiga destructor;
-    private int contaDestructor = 0;
+    private Destructor destructor;
+    private int contaDestructor;
 
     //////////METODOS//////////
     //Constructor
     public Juego() throws InterruptedException {
 
+        setContaDestructor(0);
         //Tamaño y escala lienzo
         canvas = new Lienzo();
         canvas.ponTamanioLienzo(1300, 650);
@@ -29,41 +31,75 @@ public class Juego {
 
         //Establecer fondo
         fondo = new Fondo(canvas.pideLimiteXMax(), canvas.pideLimiteYMax());
-        canvas.dibujo((canvas.pideLimiteXMax() / 2), (canvas.pideLimiteYMax() / 2), fondo.getImgSprite(), 1000, 650);
 
         //Pintar Nave
         heroe = new NaveRebelde(canvas);
-        canvas.dibujo((canvas.pideLimiteXMax() / 2) - 2, canvas.pideLimiteYMin() + 14, heroe.getImgSprite());
 
         //Mover Nave
         teclado = new Entrada();
 
-        //Pintar  3 Destructores
-        while (contaDestructor < 3) {
-            destructor = new Destructor(canvas, heroe);
-            canvas.dibujo(destructor.getPosicionRandomX(), destructor.getPosicionRandomY(), destructor.getImgSprite());
-            contaDestructor++;
-        }
+        //Pintar  Destructor
+        destructor = new Destructor(canvas);
+
     }
 
-    public void mover() throws InterruptedException {
-        while (true) { //Mientras que las vidas no se acaben
-            //if (canvas.fuePulsadaTecla(KeyEvent.VK_A)) {
-            while (heroe.getX() > (canvas.pideLimiteXMin() + 5)) {
-                sleep(600);//sleep(600) para que la nave recorra la pantalla en 5s
-                getTeclado().moverIzq(canvas, heroe);
-                canvas.dibujo(heroe.getX(), heroe.getY(), heroe.getImgSprite());
-            }
-            //}
+    public void dibuja() {
+        getCanvas().mostrar();
+        getCanvas().mostrar();
+        canvas.dibujo((canvas.pideLimiteXMax() / 2), (canvas.pideLimiteYMax() / 2), fondo.getImgSprite(), 1000, 650);
+        canvas.dibujo(heroe.getX(), heroe.getY(), heroe.getImgSprite());
+        canvas.dibujo(destructor.getX(), destructor.getY(), destructor.getImgSprite());
+    }
 
-            //if (canvas.fuePulsadaTecla(KeyEvent.VK_D)) {
-            while (heroe.getX() < (canvas.pideLimiteXMax() - 5)) {
-                sleep(600);//sleep(600) para que la nave recorra la pantalla en 5s
-                getTeclado().moverDer(canvas, heroe);
-                canvas.dibujo(heroe.getX(), heroe.getY(), heroe.getImgSprite());
+    public void limpia() {
+        canvas.limpia(Color.black);
+    }
+
+    boolean derHereo = true;
+    boolean derDestructor = true;
+
+    public void mover() throws InterruptedException {
+
+        ///////////Mover a la nave rebelde///////////
+        //if (canvas.fuePulsadaTecla(KeyEvent.VK_A)) {
+        if (heroe.getX() > (canvas.pideLimiteXMin() + 5) && derHereo == true) {
+            //sleep(600);//sleep(600) para que la nave recorra la pantalla en 5s
+            getTeclado().moverIzq(canvas, heroe, 10);
+
+        } //}
+        //if (canvas.fuePulsadaTecla(KeyEvent.VK_D)) {
+        else if (heroe.getX() < (canvas.pideLimiteXMax() - 5)) {
+            derHereo = false;
+            // sleep(600);//sleep(600) para que la nave recorra la pantalla en 5s
+            getTeclado().moverDer(canvas, heroe, 10);
+            if (!(heroe.getX() < (canvas.pideLimiteXMax() - 5))) {
+                derHereo = true;
             }
-            //}
+
         }
+        //}
+
+        ///////////Mover al destructor///////////
+        System.out.println("\nx destructor: " + destructor.getX());
+        System.out.println("Limite XMax: " + canvas.pideLimiteXMax());
+        //if (canvas.fuePulsadaTecla(KeyEvent.VK_A)) {
+        if (destructor.getX() > (canvas.pideLimiteXMin() + 5) && derDestructor == true) {
+            //sleep(600);//sleep(600) para que la nave recorra la pantalla en 5s
+            getTeclado().moverIzq(canvas, destructor, 10);
+
+        } //}
+        //if (canvas.fuePulsadaTecla(KeyEvent.VK_D)) {
+        else if (destructor.getX() < (canvas.pideLimiteXMax() - 5)) {
+            derDestructor = false;
+            // sleep(600);//sleep(600) para que la nave recorra la pantalla en 5s
+            getTeclado().moverDer(canvas, destructor, 10);
+            if (!(destructor.getX() < (canvas.pideLimiteXMax() - 5))) {
+                derDestructor = true;
+            }
+
+        }
+        //}
+
     }
 
     //Setters y Getters
@@ -95,7 +131,7 @@ public class Juego {
         return destructor;
     }
 
-    public void setDestructor(NaveEnemiga destructor) {
+    public void setDestructor(Destructor destructor) {
         this.destructor = destructor;
     }
 

@@ -10,9 +10,11 @@ public class NaveEnemiga extends ElementoGrafico {
     protected int limiteMaxYCanvas;
     protected int posicionRandomX;
     protected int posicionRandomY;
+    protected Lienzo canvas;
 
-    public NaveEnemiga(Lienzo canvas, NaveRebelde heroe) {
+    public NaveEnemiga(Lienzo canvas) {
         super();
+        this.canvas = canvas;
         puntosAlMorir = 0;
         limiteMaxXCanvas = (int) (canvas.pideLimiteXMax() - 5);
         limiteMinXCanvas = (int) (canvas.pideLimiteXMin() + 5);
@@ -87,6 +89,14 @@ public class NaveEnemiga extends ElementoGrafico {
 
     public void setPosicionRandomY(int posicionRandomY) {
         this.posicionRandomY = posicionRandomY;
+    }
+
+    public Lienzo getCanvas() {
+        return canvas;
+    }
+
+    public void setCanvas(Lienzo canvas) {
+        this.canvas = canvas;
     }
 
 }
