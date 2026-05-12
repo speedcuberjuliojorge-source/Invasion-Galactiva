@@ -1,8 +1,9 @@
 
 import edu.epromero.util.Lienzo;
 import java.awt.Color;
-import static java.lang.Thread.sleep;
 //import java.awt.event.KeyEvent;
+//import static java.lang.Thread.sleep;
+import java.awt.event.KeyEvent;
 
 /**
  *
@@ -44,11 +45,10 @@ public class Juego {
     }
 
     public void dibuja() {
-        getCanvas().mostrar();
-        getCanvas().mostrar();
         canvas.dibujo((canvas.pideLimiteXMax() / 2), (canvas.pideLimiteYMax() / 2), fondo.getImgSprite(), 1000, 650);
         canvas.dibujo(heroe.getX(), heroe.getY(), heroe.getImgSprite());
         canvas.dibujo(destructor.getX(), destructor.getY(), destructor.getImgSprite());
+        canvas.mostrar(0);
     }
 
     public void limpia() {
@@ -61,24 +61,19 @@ public class Juego {
     public void mover() throws InterruptedException {
 
         ///////////Mover a la nave rebelde///////////
-        //if (canvas.fuePulsadaTecla(KeyEvent.VK_A)) {
-        if (heroe.getX() > (canvas.pideLimiteXMin() + 5) && derHereo == true) {
-            //sleep(600);//sleep(600) para que la nave recorra la pantalla en 5s
-            getTeclado().moverIzq(canvas, heroe, 10);
+        if (canvas.fuePulsadaTecla(KeyEvent.VK_A) || canvas.fuePulsadaTecla(KeyEvent.VK_LEFT)) {
+            if (heroe.getX() > (canvas.pideLimiteXMin() + 5)) {
+                getTeclado().moverIzq(canvas, heroe, 10);
 
-        } //}
-        //if (canvas.fuePulsadaTecla(KeyEvent.VK_D)) {
-        else if (heroe.getX() < (canvas.pideLimiteXMax() - 5)) {
-            derHereo = false;
-            // sleep(600);//sleep(600) para que la nave recorra la pantalla en 5s
-            getTeclado().moverDer(canvas, heroe, 10);
-            if (!(heroe.getX() < (canvas.pideLimiteXMax() - 5))) {
-                derHereo = true;
             }
-
         }
-        //}
 
+        if (canvas.fuePulsadaTecla(KeyEvent.VK_D) || canvas.fuePulsadaTecla(KeyEvent.VK_RIGHT)) {
+            if (heroe.getX() < (canvas.pideLimiteXMax() - 5)) {
+                getTeclado().moverDer(canvas, heroe, 10);
+
+            }
+        }
         ///////////Mover al destructor///////////
         System.out.println("\nx destructor: " + destructor.getX());
         System.out.println("Limite XMax: " + canvas.pideLimiteXMax());
@@ -89,11 +84,11 @@ public class Juego {
 
         } //}
         //if (canvas.fuePulsadaTecla(KeyEvent.VK_D)) {
-        else if (destructor.getX() < (canvas.pideLimiteXMax() - 5)) {
+        else if (destructor.getX() < (canvas.pideLimiteXMax() - 10)) {
             derDestructor = false;
             // sleep(600);//sleep(600) para que la nave recorra la pantalla en 5s
             getTeclado().moverDer(canvas, destructor, 10);
-            if (!(destructor.getX() < (canvas.pideLimiteXMax() - 5))) {
+            if (!(destructor.getX() < (canvas.pideLimiteXMax() - 10))) {
                 derDestructor = true;
             }
 
