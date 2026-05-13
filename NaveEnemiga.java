@@ -1,7 +1,7 @@
 
 import edu.epromero.util.Lienzo;
 
-public class NaveEnemiga extends ElementoGrafico {
+public abstract class NaveEnemiga extends ElementoGrafico {
 
     protected int puntosAlMorir;
     protected int limiteMinXCanvas;
@@ -26,9 +26,7 @@ public class NaveEnemiga extends ElementoGrafico {
         posicionRandomY = (int) ((Math.random() + 0.64) * (limiteMaxYCanvas - limiteMinYCanvas));
     }
 
-    public void Mueve(Entrada teclado) {
-
-    }
+    public abstract void mueve(Entrada E);
 
     private void dispara() {
 

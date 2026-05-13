@@ -25,7 +25,7 @@ public class Juego {
     public Juego() throws InterruptedException {
 
         //Declaraciones básicas
-        elemento = new ElementoGrafico[3];
+        elemento = new ElementoGrafico[4];
         setContaDestructor(0);
         //Tamaño y escala lienzo
         canvas = new Lienzo();
@@ -47,7 +47,8 @@ public class Juego {
         //Pintar Destructor
         destructor = new Destructor(canvas);
         elemento[2] = destructor;
-
+        Destructor d2 = new Destructor(canvas);
+        elemento[3] = d2;
     }
 
     public void dibuja() {
@@ -63,44 +64,11 @@ public class Juego {
     }
 
     boolean derHereo = true;
-    boolean derDestructor = true;
 
-    public void mover() throws InterruptedException {
-
-        ///////////Mover a la nave rebelde///////////
-        if (canvas.fuePulsadaTecla(KeyEvent.VK_A) || canvas.fuePulsadaTecla(KeyEvent.VK_LEFT)) {
-            if (heroe.getX() > (canvas.pideLimiteXMin() + 5)) {
-                getTeclado().moverIzq(canvas, heroe, 10);
-
-            }
+    public void mover() {
+        for (int i = 1; i < elemento.length; i++) {
+            elemento[i].mueve(teclado);
         }
-
-        if (canvas.fuePulsadaTecla(KeyEvent.VK_D) || canvas.fuePulsadaTecla(KeyEvent.VK_RIGHT)) {
-            if (heroe.getX() < (canvas.pideLimiteXMax() - 5)) {
-                getTeclado().moverDer(canvas, heroe, 10);
-
-            }
-        }
-        ///////////Mover al destructor///////////
-        System.out.println("\nx destructor: " + destructor.getX());
-        System.out.println("Limite XMax: " + canvas.pideLimiteXMax());
-        //if (canvas.fuePulsadaTecla(KeyEvent.VK_A)) {
-        if (destructor.getX() > (canvas.pideLimiteXMin() + 10) && derDestructor == true) {
-            //sleep(600);//sleep(600) para que la nave recorra la pantalla en 5s
-            getTeclado().moverIzq(canvas, destructor, 20);
-
-        } //}
-        //if (canvas.fuePulsadaTecla(KeyEvent.VK_D)) {
-        else if (destructor.getX() < (canvas.pideLimiteXMax() - 10)) {
-            derDestructor = false;
-            // sleep(600);//sleep(600) para que la nave recorra la pantalla en 5s
-            getTeclado().moverDer(canvas, destructor, 20);
-            if (!(destructor.getX() < (canvas.pideLimiteXMax() - 10))) {
-                derDestructor = true;
-            }
-
-        }
-        //}
 
     }
 

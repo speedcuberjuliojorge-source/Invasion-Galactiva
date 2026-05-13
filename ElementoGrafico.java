@@ -16,6 +16,7 @@ public class ElementoGrafico {
     protected boolean visible;
     protected String sprite;
     protected Imagen imgSprite;
+    protected int velocidad;
 
     //////////METODOS//////////
 
@@ -32,6 +33,11 @@ public class ElementoGrafico {
         visible = false;
         sprite = "";
         imgSprite = null;
+        velocidad = 0;
+    }
+
+    public void mueve(Entrada e) {
+
     }
 
     /**
@@ -92,6 +98,14 @@ public class ElementoGrafico {
 
     public void setImgSprite(Imagen imgSprite) {
         this.imgSprite = imgSprite;
+    }
+
+    public int getVelocidad() {
+        return velocidad;
+    }
+
+    public void setVelocidad(int velocidad) {
+        this.velocidad = velocidad;
     }
 
 }

@@ -11,10 +11,9 @@ public class InvasionGalactica {
         Juego j1 = new Juego();
         while (true) {
             j1.dibuja();
-            sleep(500);
+            sleep(260);
             j1.limpia();
             j1.mover();
         }
-        // j1.dibuja();
     }
 }
