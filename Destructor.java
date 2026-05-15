@@ -1,17 +1,25 @@
 
 import edu.epromero.util.Lienzo;
 
+/**
+ * Clase Destructor, hereda de NaveEnemiga
+ *
+ * @author speed
+ */
 public class Destructor extends NaveEnemiga {
 
     protected boolean derDestructor;
     private int contaCiclos;
 
+    /**
+     * Constructor
+     *
+     * @param canvas
+     */
     public Destructor(Lienzo canvas) {
         super(canvas);
         super.setX(super.getPosicionRandomX());
         super.setY(super.getPosicionRandomY());
-        System.out.println("X = " + super.getX());
-        System.out.println("Y = " + super.getY());
         super.setPuntosAlMorir(50);
         super.setSprite(".\\resources\\Destructor.png");
         super.imagen(sprite);
@@ -20,6 +28,11 @@ public class Destructor extends NaveEnemiga {
         setContaCiclos(1);
     }
 
+    /**
+     * Mueve al destructor, y al ciclo de sus balas
+     *
+     * @param e
+     */
     public void mueve(Entrada e) {
         if (getX() >= (canvas.pideLimiteXMin() + velocidad) && isDerDestructor() == true) {
             if (!(getX() < (canvas.pideLimiteXMin() - velocidad))) {
@@ -28,8 +41,7 @@ public class Destructor extends NaveEnemiga {
 
         } else if (getX() <= (canvas.pideLimiteXMax() - velocidad)) {
             setDerDestructor(false);
-            if (getX() <= (canvas.pideLimiteXMax() - velocidad))/*Se suma el 5 para obtener el
-            limite del canvas 0*/ {
+            if (getX() <= (canvas.pideLimiteXMax() - velocidad)) {
                 setX(getX() + velocidad);
             }
 
@@ -38,7 +50,6 @@ public class Destructor extends NaveEnemiga {
             }
 
         }
-        System.out.println("Coordenadas destructor: " + "(" + getX() + ", " + getY() + ")");
         //La i se inicializa en el indice donde inican las balas del destructor
         //y  terminan donde el indice inica las balas de otro enemigo
         for (int i = 1; i < 2; i++) {
@@ -62,10 +73,18 @@ public class Destructor extends NaveEnemiga {
         setContaCiclos(getContaCiclos() + 1);
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isDerDestructor() {
         return derDestructor;
     }
 
+    /**
+     *
+     * @param derDestructor
+     */
     public void setDerDestructor(boolean derDestructor) {
         this.derDestructor = derDestructor;
     }

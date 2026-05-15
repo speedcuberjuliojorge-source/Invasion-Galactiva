@@ -11,7 +11,7 @@ public class Bala extends ElementoGrafico {
     private Lienzo canvas;
 
     /**
-     * Constructor de la clase Bala, parametros
+     * Constructor de la clase Bala con NaveEnemiga
      *
      * @param entrada
      * @param nave
@@ -26,12 +26,26 @@ public class Bala extends ElementoGrafico {
         super.setVelocidad(10);
     }
 
+    /**
+     * Da el primer avanze del ElementoGrafico cuando se mueve por primera vez
+     * con NaveEnemiga
+     *
+     * @param x
+     * @param y
+     * @param nave
+     */
     public void mueveInicio(int x, int y, NaveEnemiga nave) {
         setX(nave.getX() + x);
         setY(nave.getY() + y);
 
     }
 
+    /**
+     * Constructor de la clase Bala con NaveEnemiga
+     *
+     * @param entrada
+     * @param nave
+     */
     public Bala(Entrada entrada, NaveRebelde nave) {
         super();
         super.setSprite(".\\resources\\bala.png");
@@ -42,12 +56,26 @@ public class Bala extends ElementoGrafico {
         super.setVelocidad(10);
     }
 
+    /**
+     * Da el primer avanze del ElementoGrafico cuando se mueve por primera vez
+     * con NaveEnemiga
+     *
+     * @param x
+     * @param y
+     * @param nave
+     */
     public void mueveInicio(int x, int y, NaveRebelde nave) {
         setX(nave.getX() + x);
         setY(nave.getY() + y);
 
     }
 
+    /**
+     * Metodo standard de movimiento
+     *
+     * @param x
+     * @param y
+     */
     public void mueve(int x, int y) {
         setX(getX() + x);
         setY(getY() + y);

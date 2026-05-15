@@ -1,6 +1,11 @@
 
 import edu.epromero.util.Lienzo;
 
+/**
+ * Utilizada como stock para transportar atributos por diferentes clases
+ *
+ * @author speed
+ */
 public class Entrada {
 
     private Lienzo canvas;
@@ -9,34 +14,66 @@ public class Entrada {
     private Destructor destructor;
     private Bala balas[];
 
+    /**
+     * Constructor, define el arreglo de balas
+     */
     public Entrada() {
         balas = new Bala[2];
     }
 
+    /**
+     * Constructor, define el lienzo
+     *
+     * @param canvas
+     */
     public Entrada(Lienzo canvas) {
         this.canvas = canvas;
     }
 
+    /**
+     *
+     * @return
+     */
     public Lienzo getCanvas() {
         return canvas;
     }
 
+    /**
+     *
+     * @param canvas
+     */
     public void setCanvas(Lienzo canvas) {
         this.canvas = canvas;
     }
 
+    /**
+     *
+     * @return
+     */
     public Bala getBala() {
         return bala;
     }
 
+    /**
+     *
+     * @param bala
+     */
     public void setBala(Bala bala) {
         this.bala = bala;
     }
 
+    /**
+     *
+     * @return
+     */
     public Destructor getDestructor() {
         return destructor;
     }
 
+    /**
+     *
+     * @param destructor
+     */
     public void setDestructor(Destructor destructor) {
         this.destructor = destructor;
     }

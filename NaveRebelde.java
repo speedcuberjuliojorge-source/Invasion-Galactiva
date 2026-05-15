@@ -2,6 +2,11 @@
 import edu.epromero.util.Lienzo;
 import java.awt.event.KeyEvent;
 
+/**
+ * Clase NaveRebelde, hereda de ElementoGrafico e instancía al heroe
+ *
+ * @author speed
+ */
 public class NaveRebelde extends ElementoGrafico {
 
     private int puntos;
@@ -9,6 +14,11 @@ public class NaveRebelde extends ElementoGrafico {
     private Lienzo canvas;
     private int contaCiclos;
 
+    /**
+     * Constructor, define el lienzo
+     *
+     * @param canvas
+     */
     public NaveRebelde(Lienzo canvas) {
         super();
         super.setSprite(".\\resources\\Heroe.png");
@@ -21,6 +31,11 @@ public class NaveRebelde extends ElementoGrafico {
         setContaCiclos(1);
     }
 
+    /**
+     * Mueve a la NAverRebelde y a sus balas movimiento a movimiento
+     *
+     * @param e
+     */
     public void mueve(Entrada e) {
         if (getCanvas().fuePulsadaTecla(KeyEvent.VK_A) || getCanvas().fuePulsadaTecla(KeyEvent.VK_LEFT)) {
             if (getX() > (getCanvas().pideLimiteXMin() + velocidad)) {
@@ -52,7 +67,7 @@ public class NaveRebelde extends ElementoGrafico {
             if (getCanvas().fuePulsadaTecla(KeyEvent.VK_SPACE) /*&& (e.getBala2().getY() == getY())*/) {
                 e.getBalas()[i].setVisible(true);
                 if (getContaCiclos() == 1) {
-                    e.getBalas()[i].mueveInicio(0, 10, this);
+                    e.getBalas()[i].mueveInicio(0, 0, this);
                 }
 
             }
@@ -70,18 +85,34 @@ public class NaveRebelde extends ElementoGrafico {
     }
 
     //Getters & Setters
+    /**
+     *
+     * @return
+     */
     public int getPuntos() {
         return puntos;
     }
 
+    /**
+     *
+     * @param puntos
+     */
     public void setPuntos(int puntos) {
         this.puntos = puntos;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isVisible() {
         return visible;
     }
 
+    /**
+     *
+     * @param visible
+     */
     public void setVisible(boolean visible) {
         this.visible = visible;
     }
