@@ -38,7 +38,6 @@ public class Destructor extends NaveEnemiga {
             }
 
         }
-        System.out.println("Coordenadas destructor: " + "(" + getX() + ", " + getY() + ")");
 
         if (getContaCiclos() % 2 == 0) {
             e.getBala().setVisible(true);

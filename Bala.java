@@ -21,6 +21,22 @@ public class Bala extends ElementoGrafico {
 
     }
 
+    public Bala(Entrada entrada, NaveRebelde heroe) {
+        super();
+        super.setSprite(".\\resources\\bala.png");
+        super.imagen(sprite);
+        super.setX(heroe.getX());
+        super.setY(heroe.getY());
+        this.canvas = entrada.getCanvas();
+        super.setVelocidad(10);
+    }
+
+    public void mueveInicio(int x, int y, NaveRebelde heroe) {
+        setX(heroe.getX() + x);
+        setY(heroe.getY() + y);
+
+    }
+
     public void mueve(int x, int y) {
         setX(getX() + x);
         setY(getY() + y);
