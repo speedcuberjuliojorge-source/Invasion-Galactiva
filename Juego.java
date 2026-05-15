@@ -18,6 +18,7 @@ public class Juego {
     private int contaDestructor;
     private ElementoGrafico elemento[];
     private Bala bala;
+    private Bala bala2;
     private boolean derHereo;
 
     //////////METODOS//////////
@@ -25,7 +26,7 @@ public class Juego {
     public Juego() throws InterruptedException {
 
         //Declaraciones básicas
-        elemento = new ElementoGrafico[4];
+        elemento = new ElementoGrafico[5];
         setContaDestructor(0);
         setDerHereo(true);
         //Tamaño y escala lienzo
@@ -56,6 +57,10 @@ public class Juego {
         bala = new Bala(entrada, destructor);
         elemento[3] = bala;
         entrada.setBala((Bala) (elemento[3]));
+
+        bala2 = new Bala(entrada, destructor);
+        elemento[4] = bala2;
+        entrada.setBala2((Bala) (elemento[4]));
 
     }
 
@@ -143,6 +148,20 @@ public class Juego {
 
     public void setDerHereo(boolean derHereo) {
         this.derHereo = derHereo;
+    }
+
+    /**
+     * @return the bala2
+     */
+    public Bala getBala2() {
+        return bala2;
+    }
+
+    /**
+     * @param bala2 the bala2 to set
+     */
+    public void setBala2(Bala bala2) {
+        this.bala2 = bala2;
     }
 
 }
