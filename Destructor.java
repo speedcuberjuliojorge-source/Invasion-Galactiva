@@ -4,6 +4,7 @@ import edu.epromero.util.Lienzo;
 public class Destructor extends NaveEnemiga {
 
     protected boolean derDestructor;
+    private int contaCiclos;
 
     public Destructor(Lienzo canvas) {
         super(canvas);
@@ -16,8 +17,8 @@ public class Destructor extends NaveEnemiga {
         super.imagen(sprite);
         derDestructor = true;
         super.setVelocidad(15);
+        setContaCiclos(1);
     }
-    int contaCiclos = 1;
 
     public void mueve(Entrada e) {
         if (getX() >= (canvas.pideLimiteXMin() + velocidad) && isDerDestructor() == true) {
@@ -39,9 +40,9 @@ public class Destructor extends NaveEnemiga {
         }
         System.out.println("Coordenadas destructor: " + "(" + getX() + ", " + getY() + ")");
 
-        if (contaCiclos % 2 == 0) {
+        if (getContaCiclos() % 2 == 0) {
             e.getBala().setVisible(true);
-            if (contaCiclos == 2) {
+            if (getContaCiclos() == 2) {
                 e.getBala().mueveInicio(0, -10, this);
             }
 
@@ -49,7 +50,12 @@ public class Destructor extends NaveEnemiga {
         if (e.getBala().isVisible() == true) {
             e.getBala().mueve(0, -10);
         }
-        contaCiclos++;
+
+        if (e.getBala().getY() < 0) {
+            e.getBala().setVisible(false);
+            setContaCiclos(0);
+        }
+        setContaCiclos(getContaCiclos() + 1);
     }
 
     public boolean isDerDestructor() {
@@ -58,6 +64,20 @@ public class Destructor extends NaveEnemiga {
 
     public void setDerDestructor(boolean derDestructor) {
         this.derDestructor = derDestructor;
+    }
+
+    /**
+     * @return the contaCiclos
+     */
+    public int getContaCiclos() {
+        return contaCiclos;
+    }
+
+    /**
+     * @param contaCiclos the contaCiclos to set
+     */
+    public void setContaCiclos(int contaCiclos) {
+        this.contaCiclos = contaCiclos;
     }
 
 }
