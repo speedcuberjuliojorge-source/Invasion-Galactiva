@@ -51,7 +51,7 @@ public class Destructor extends NaveEnemiga {
             e.getBala().mueve(0, -10);
         }
 
-        if (e.getBala().getY() < 0) {
+        if (e.getBala().getY() < 0 && e.getBala().isVisible()) {
             e.getBala().setVisible(false);
             setContaCiclos(0);
         }
