@@ -39,21 +39,25 @@ public class Destructor extends NaveEnemiga {
 
         }
         System.out.println("Coordenadas destructor: " + "(" + getX() + ", " + getY() + ")");
+        //La i se inicializa en el indice donde inican las balas del destructor
+        //y  terminan donde el indice inica las balas de otro enemigo
+        for (int i = 1; i < 2; i++) {
+            if (getContaCiclos() % 2 == 0) {
+                e.getBalas()[i].setVisible(true);
+                if (getContaCiclos() == 2) {
+                    e.getBalas()[i].mueveInicio(0, -10, this);
+                }
 
-        if (getContaCiclos() % 2 == 0) {
-            e.getBala().setVisible(true);
-            if (getContaCiclos() == 2) {
-                e.getBala().mueveInicio(0, -10, this);
+            }
+            if (e.getBalas()[i].isVisible() == true) {
+                e.getBalas()[i].mueve(0, -10);
             }
 
-        }
-        if (e.getBala().isVisible() == true) {
-            e.getBala().mueve(0, -10);
-        }
+            if (e.getBalas()[i].getY() < 0 && e.getBalas()[i].isVisible()) {
+                e.getBalas()[i].setVisible(false);
+                setContaCiclos(0);
+            }
 
-        if (e.getBala().getY() < 0 && e.getBala().isVisible()) {
-            e.getBala().setVisible(false);
-            setContaCiclos(0);
         }
         setContaCiclos(getContaCiclos() + 1);
     }

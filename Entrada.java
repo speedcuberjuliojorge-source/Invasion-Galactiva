@@ -7,6 +7,11 @@ public class Entrada {
     private Bala bala;
     private Bala bala2;
     private Destructor destructor;
+    private Bala balas[];
+
+    public Entrada() {
+        balas = new Bala[2];
+    }
 
     public Entrada(Lienzo canvas) {
         this.canvas = canvas;
@@ -48,6 +53,20 @@ public class Entrada {
      */
     public void setBala2(Bala bala2) {
         this.bala2 = bala2;
+    }
+
+    /**
+     * @return the balas
+     */
+    public Bala[] getBalas() {
+        return balas;
+    }
+
+    /**
+     * @param balas the balas to set
+     */
+    public void setBalas(Bala[] balas) {
+        this.balas = balas;
     }
 
 }

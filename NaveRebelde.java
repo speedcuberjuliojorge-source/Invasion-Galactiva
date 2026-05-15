@@ -46,23 +46,27 @@ public class NaveRebelde extends ElementoGrafico {
         }
 
         //Disparar
-        if (getCanvas().fuePulsadaTecla(KeyEvent.VK_SPACE) /*&& (e.getBala2().getY() == getY())*/) {
-            e.getBala2().setVisible(true);
-            if (getContaCiclos() == 1) {
-                e.getBala2().mueveInicio(0, 10, this);
+        //La i se inicializa en el indice donde inican las balas del destructor
+        //y  terminan donde el indice inica las balas de otro enemigo
+        for (int i = 0; i < 1; i++) {
+            if (getCanvas().fuePulsadaTecla(KeyEvent.VK_SPACE) /*&& (e.getBala2().getY() == getY())*/) {
+                e.getBalas()[i].setVisible(true);
+                if (getContaCiclos() == 1) {
+                    e.getBalas()[i].mueveInicio(0, 10, this);
+                }
+
+            }
+            if (e.getBalas()[i].isVisible() == true) {
+                e.getBalas()[i].mueve(0, 10);
+            }
+
+            if (e.getBalas()[i].getY() > 100 && e.getBalas()[i].isVisible()) {
+                e.getBalas()[i].setVisible(false);
+                setContaCiclos(0);
             }
 
         }
-        if (e.getBala2().isVisible() == true) {
-            e.getBala2().mueve(0, 10);
-        }
-
-        if (e.getBala2().getY() > 100 && e.getBala2().isVisible()) {
-            e.getBala2().setVisible(false);
-            setContaCiclos(0);
-        }
         setContaCiclos(getContaCiclos() + 1);
-
     }
 
     //Getters & Setters

@@ -1,10 +1,21 @@
 
 import edu.epromero.util.Lienzo;
 
+/**
+ * Clase bala, hereda de ELementoGrafico y trabaja con las Balas del juego
+ *
+ * @author speed
+ */
 public class Bala extends ElementoGrafico {
 
-    Lienzo canvas;
+    private Lienzo canvas;
 
+    /**
+     * Constructor de la clase Bala, parametros
+     *
+     * @param entrada
+     * @param nave
+     */
     public Bala(Entrada entrada, NaveEnemiga nave) {
         super();
         super.setSprite(".\\resources\\bala.png");
@@ -41,5 +52,19 @@ public class Bala extends ElementoGrafico {
         setX(getX() + x);
         setY(getY() + y);
         System.out.println("Coordenadas bala: " + "(" + getX() + ", " + getY() + ")");
+    }
+
+    /**
+     * @return the canvas
+     */
+    public Lienzo getCanvas() {
+        return canvas;
+    }
+
+    /**
+     * @param canvas the canvas to set
+     */
+    public void setCanvas(Lienzo canvas) {
+        this.canvas = canvas;
     }
 }
