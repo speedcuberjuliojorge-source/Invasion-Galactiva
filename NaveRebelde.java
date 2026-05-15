@@ -16,6 +16,7 @@ public class NaveRebelde extends ElementoGrafico {
         super.setY((int) (canvas.pideLimiteYMin() + 14));
         this.canvas = canvas;
         super.setVelocidad(5);
+        setVisible(true);
     }
 
     public void mueve(Entrada e) {

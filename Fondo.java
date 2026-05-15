@@ -19,6 +19,8 @@ public class Fondo extends ElementoGrafico {
         this.ancho = ancho;
         super.setSprite(".\\resources\\Fondo.png");
         super.imagen(sprite);
+        super.setVisible(true);
+
     }
 
     //Setters y Getters

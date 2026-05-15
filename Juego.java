@@ -1,9 +1,7 @@
 
 import edu.epromero.util.Lienzo;
-import java.awt.Color;
 //import java.awt.event.KeyEvent;
 //import static java.lang.Thread.sleep;
-import java.awt.event.KeyEvent;
 
 /**
  *
@@ -15,10 +13,12 @@ public class Juego {
     private Lienzo canvas;
     private Fondo fondo;
     private NaveRebelde heroe;
-    private Entrada teclado;
+    private Entrada entrada;
     private Destructor destructor;
     private int contaDestructor;
-    ElementoGrafico elemento[];
+    private ElementoGrafico elemento[];
+    private Bala bala;
+    private boolean derHereo;
 
     //////////METODOS//////////
     //Constructor
@@ -27,6 +27,7 @@ public class Juego {
         //Declaraciones básicas
         elemento = new ElementoGrafico[4];
         setContaDestructor(0);
+        setDerHereo(true);
         //Tamaño y escala lienzo
         canvas = new Lienzo();
         canvas.ponTamanioLienzo(1300, 650);
@@ -41,33 +42,40 @@ public class Juego {
         heroe = new NaveRebelde(canvas);
         elemento[1] = heroe;
 
-        //Mover Nave
-        teclado = new Entrada();
+        //Mover Entrada
+        entrada = new Entrada(canvas);
 
         //Pintar Destructor
         destructor = new Destructor(canvas);
         elemento[2] = destructor;
-        Destructor d2 = new Destructor(canvas);
-        elemento[3] = d2;
+        entrada.setDestructor((Destructor) (elemento[2]));
+        /*Destructor d2 = new Destructor(canvas);
+        elemento[3] = d2;*/
+
+        //Iniciar Bala
+        bala = new Bala(entrada, destructor);
+        elemento[3] = bala;
+        entrada.setBala((Bala) (elemento[3]));
+
     }
 
     public void dibuja() {
-        canvas.dibujo((canvas.pideLimiteXMax() / 2), (canvas.pideLimiteYMax() / 2), elemento[0].getImgSprite(), 1000, 650);
-        for (int i = 1; i < elemento.length; i++) {
-            canvas.dibujo(elemento[i].getX(), elemento[i].getY(), elemento[i].getImgSprite());
+        canvas.dibujo((canvas.pideLimiteXMax() / 2), (canvas.pideLimiteYMax() / 2), getElemento()[0].getImgSprite(), 1000, 650);
+        for (int i = 1; i < getElemento().length; i++) {
+            if (getElemento()[i].isVisible() == true) {
+                canvas.dibujo(getElemento()[i].getX(), getElemento()[i].getY(), getElemento()[i].getImgSprite());
+            }
         }
         canvas.mostrar(0);
     }
 
     public void limpia() {
-        canvas.limpia(Color.black);
+        canvas.limpia();
     }
 
-    boolean derHereo = true;
-
     public void mover() {
-        for (int i = 1; i < elemento.length; i++) {
-            elemento[i].mueve(teclado);
+        for (int i = 1; i < getElemento().length; i++) {
+            getElemento()[i].mueve(entrada);
         }
 
     }
@@ -89,12 +97,12 @@ public class Juego {
         this.fondo = fondo;
     }
 
-    public Entrada getTeclado() {
-        return teclado;
+    public Entrada getEntrada() {
+        return entrada;
     }
 
-    public void setTeclado(Entrada teclado) {
-        this.teclado = teclado;
+    public void setEntrada(Entrada entrada) {
+        this.entrada = entrada;
     }
 
     public NaveEnemiga getDestructor() {
@@ -111,6 +119,30 @@ public class Juego {
 
     public void setContaDestructor(int contaDestructor) {
         this.contaDestructor = contaDestructor;
+    }
+
+    public ElementoGrafico[] getElemento() {
+        return elemento;
+    }
+
+    public void setElemento(ElementoGrafico[] elemento) {
+        this.elemento = elemento;
+    }
+
+    public Bala getBala() {
+        return bala;
+    }
+
+    public void setBala(Bala bala) {
+        this.bala = bala;
+    }
+
+    public boolean isDerHereo() {
+        return derHereo;
+    }
+
+    public void setDerHereo(boolean derHereo) {
+        this.derHereo = derHereo;
     }
 
 }

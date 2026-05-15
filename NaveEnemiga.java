@@ -24,6 +24,8 @@ public abstract class NaveEnemiga extends ElementoGrafico {
 
         posicionRandomX = (int) (Math.random() * (limiteMaxXCanvas - limiteMinXCanvas));
         posicionRandomY = (int) ((Math.random() + 0.64) * (limiteMaxYCanvas - limiteMinYCanvas));
+
+        super.setVisible(true);
     }
 
     public abstract void mueve(Entrada E);

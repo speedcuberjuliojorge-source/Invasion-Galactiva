@@ -17,9 +17,9 @@ public class Destructor extends NaveEnemiga {
         derDestructor = true;
         super.setVelocidad(15);
     }
+    int contaCiclos = 1;
 
     public void mueve(Entrada e) {
-
         if (getX() >= (canvas.pideLimiteXMin() + velocidad) && isDerDestructor() == true) {
             if (!(getX() < (canvas.pideLimiteXMin() - velocidad))) {
                 setX(getX() - velocidad);
@@ -37,7 +37,19 @@ public class Destructor extends NaveEnemiga {
             }
 
         }
+        System.out.println("Coordenadas destructor: " + "(" + getX() + ", " + getY() + ")");
 
+        if (contaCiclos % 2 == 0) {
+            e.getBala().setVisible(true);
+            if (contaCiclos == 2) {
+                e.getBala().mueveInicio(0, -10, this);
+            }
+
+        }
+        if (e.getBala().isVisible() == true) {
+            e.getBala().mueve(0, -10);
+        }
+        contaCiclos++;
     }
 
     public boolean isDerDestructor() {
