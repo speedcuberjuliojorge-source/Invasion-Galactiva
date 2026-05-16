@@ -1,15 +1,13 @@
 
 import edu.epromero.util.Imagen;
-import edu.epromero.util.Lienzo;
 
 /**
- * Vidas y visible aplican unicamente para naves
+ * Clase pader, de esta heredan todos los elementos pintados en el lienzo
  *
  * @author speed
  */
 public class ElementoGrafico {
 
-    //////////ATRIBUTOS//////////
     protected int x;
     protected int y;
     protected int Vidas;
@@ -17,15 +15,12 @@ public class ElementoGrafico {
     protected String sprite;
     protected Imagen imgSprite;
     protected int velocidad;
+    private int altura;
+    private int anchura;
 
-    //////////METODOS//////////
-
-    public ElementoGrafico(int x, int y, String sprite) {
-        this.x = x;
-        this.y = y;
-        this.sprite = sprite;
-    }
-
+    /**
+     * Constructor de clase
+     */
     public ElementoGrafico() {
         x = 0;
         y = 0;
@@ -34,8 +29,15 @@ public class ElementoGrafico {
         sprite = "";
         imgSprite = null;
         velocidad = 0;
+        altura = 0;
+        anchura = 0;
     }
 
+    /**
+     * Se incluy este metodo para poder llamarlo en sus subclase
+     *
+     * @param e
+     */
     public void mueve(Entrada e) {
 
     }
@@ -47,65 +49,145 @@ public class ElementoGrafico {
         imgSprite = new Imagen(sprite);
     }
 
-    public void aparecer(Lienzo l) {
-        l.dibujo(x, y, imgSprite);
-    }
-
     //Getters y Setters
+    /**
+     *
+     * @return
+     */
     public int getX() {
         return x;
     }
 
+    /**
+     *
+     * @param x
+     */
     public void setX(int x) {
         this.x = x;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getY() {
         return y;
     }
 
+    /**
+     *
+     * @param y
+     */
     public void setY(int y) {
         this.y = y;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getVidas() {
         return Vidas;
     }
 
+    /**
+     *
+     * @param Vidas
+     */
     public void setVidas(int Vidas) {
         this.Vidas = Vidas;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isVisible() {
         return visible;
     }
 
+    /**
+     *
+     * @param visible
+     */
     public void setVisible(boolean visible) {
         this.visible = visible;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getSprite() {
         return sprite;
     }
 
+    /**
+     *
+     * @param sprite
+     */
     public void setSprite(String sprite) {
         this.sprite = sprite;
     }
 
+    /**
+     *
+     * @return
+     */
     public Imagen getImgSprite() {
         return imgSprite;
     }
 
+    /**
+     *
+     * @param imgSprite
+     */
     public void setImgSprite(Imagen imgSprite) {
         this.imgSprite = imgSprite;
     }
 
+    /**
+     *
+     * @return
+     */
     public int getVelocidad() {
         return velocidad;
     }
 
+    /**
+     *
+     * @param velocidad
+     */
     public void setVelocidad(int velocidad) {
         this.velocidad = velocidad;
+    }
+
+    /**
+     * @return the altura
+     */
+    public int getAltura() {
+        return altura;
+    }
+
+    /**
+     * @param altura the altura to set
+     */
+    public void setAltura(int altura) {
+        this.altura = altura;
+    }
+
+    /**
+     * @return the anchura
+     */
+    public int getAnchura() {
+        return anchura;
+    }
+
+    /**
+     * @param anchura the anchura to set
+     */
+    public void setAnchura(int anchura) {
+        this.anchura = anchura;
     }
 
 }

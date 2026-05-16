@@ -1,10 +1,21 @@
 
 import edu.epromero.util.Lienzo;
 
+/**
+ * Clase bala, hereda de ELementoGrafico y trabaja con las Balas del juego
+ *
+ * @author speed
+ */
 public class Bala extends ElementoGrafico {
 
-    Lienzo canvas;
+    private Lienzo canvas;
 
+    /**
+     * Constructor de la clase Bala con NaveEnemiga
+     *
+     * @param entrada
+     * @param nave
+     */
     public Bala(Entrada entrada, NaveEnemiga nave) {
         super();
         super.setSprite(".\\resources\\bala.png");
@@ -13,33 +24,78 @@ public class Bala extends ElementoGrafico {
         super.setY(nave.getY());
         this.canvas = entrada.getCanvas();
         super.setVelocidad(10);
+        super.setAnchura(1);
+        super.setAltura(4);
     }
 
+    /**
+     * Da el primer avanze del ElementoGrafico cuando se mueve por primera vez
+     * con NaveEnemiga
+     *
+     * @param x
+     * @param y
+     * @param nave
+     */
     public void mueveInicio(int x, int y, NaveEnemiga nave) {
         setX(nave.getX() + x);
         setY(nave.getY() + y);
 
     }
 
-    public Bala(Entrada entrada, NaveRebelde heroe) {
+    /**
+     * Constructor de la clase Bala con NaveEnemiga
+     *
+     * @param entrada
+     * @param nave
+     */
+    public Bala(Entrada entrada, NaveRebelde nave) {
         super();
         super.setSprite(".\\resources\\bala.png");
         super.imagen(sprite);
-        super.setX(heroe.getX());
-        super.setY(heroe.getY());
+        super.setX(nave.getX());
+        super.setY(nave.getY());
         this.canvas = entrada.getCanvas();
         super.setVelocidad(10);
+        super.setAltura(2);
+        super.setAnchura(4);
     }
 
-    public void mueveInicio(int x, int y, NaveRebelde heroe) {
-        setX(heroe.getX() + x);
-        setY(heroe.getY() + y);
+    /**
+     * Da el primer avanze del ElementoGrafico cuando se mueve por primera vez
+     * con NaveEnemiga
+     *
+     * @param x
+     * @param y
+     * @param nave
+     */
+    public void mueveInicio(int x, int y, NaveRebelde nave) {
+        setX(nave.getX() + x);
+        setY(nave.getY() + y);
 
     }
 
+    /**
+     * Metodo standard de movimiento
+     *
+     * @param x
+     * @param y
+     */
     public void mueve(int x, int y) {
         setX(getX() + x);
         setY(getY() + y);
-        System.out.println("Coordenadas bala: " + "(" + getX() + ", " + getY() + ")");
+    }
+
+    /**
+     * @return the canvas
+     */
+    public Lienzo getCanvas() {
+        return canvas;
+    }
+
+    /**
+     * @param canvas the canvas to set
+     */
+    public void setCanvas(Lienzo canvas) {
+        this.canvas = canvas;
     }
 }

@@ -2,14 +2,23 @@
 import edu.epromero.util.Lienzo;
 import java.awt.event.KeyEvent;
 
+/**
+ * Clase NaveRebelde, hereda de ElementoGrafico e instancía al heroe
+ *
+ * @author speed
+ */
 public class NaveRebelde extends ElementoGrafico {
 
     private int puntos;
     private boolean visible;
     private Lienzo canvas;
     private int contaCiclos;
-    Bala bala;
 
+    /**
+     * Constructor, define el lienzo
+     *
+     * @param canvas
+     */
     public NaveRebelde(Lienzo canvas) {
         super();
         super.setSprite(".\\resources\\Heroe.png");
@@ -20,9 +29,18 @@ public class NaveRebelde extends ElementoGrafico {
         super.setVelocidad(5);
         setVisible(true);
         setContaCiclos(1);
+        super.setAltura(4);
+        super.setAnchura(15);
     }
 
+    /**
+     * Mueve a la NAverRebelde y a sus balas movimiento a movimiento
+     *
+     * @param e
+     */
     public void mueve(Entrada e) {
+
+        //Mover la nave
         if (getCanvas().fuePulsadaTecla(KeyEvent.VK_A) || getCanvas().fuePulsadaTecla(KeyEvent.VK_LEFT)) {
             if (getX() > (getCanvas().pideLimiteXMin() + velocidad)) {
                 if (getCanvas().existenMasTeclasPulsadas()) {
@@ -47,37 +65,59 @@ public class NaveRebelde extends ElementoGrafico {
         }
 
         //Disparar
-        if (getCanvas().fuePulsadaTecla(KeyEvent.VK_SPACE)) {
-            e.getBala2().setVisible(true);
-            if (getContaCiclos() == 1) {
-                e.getBala2().mueveInicio(0, 10, this);
+        //La i se inicializa en el indice donde inican las balas del destructor
+        //y  terminan donde el indice inica las balas de otro enemigo
+        for (int i = 0; i < 1; i++) {
+            if (getCanvas().fuePulsadaTecla(KeyEvent.VK_SPACE)) {
+                e.getBalas()[i].setVisible(true);
+                if (getContaCiclos() == 1) {
+                    e.getBalas()[i].mueveInicio(0, 10, this);
+                }
+
+            }
+            if (e.getBalas()[i].isVisible() == true) {
+                e.getBalas()[i].mueve(0, 10);
+            }
+
+            if (e.getBalas()[i].getY() > 100 && e.getBalas()[i].isVisible()) {
+                e.getBalas()[i].setVisible(false);
+                setContaCiclos(0);
             }
 
         }
-        if (e.getBala2().isVisible() == true) {
-            e.getBala2().mueve(0, 10);
-        }
-
-        if (e.getBala2().getY() > 100) {
-            e.getBala2().setVisible(false);
-            setContaCiclos(0);
-        }
         setContaCiclos(getContaCiclos() + 1);
+
     }
 
     //Getters & Setters
+    /**
+     *
+     * @return
+     */
     public int getPuntos() {
         return puntos;
     }
 
+    /**
+     *
+     * @param puntos
+     */
     public void setPuntos(int puntos) {
         this.puntos = puntos;
     }
 
+    /**
+     *
+     * @return
+     */
     public boolean isVisible() {
         return visible;
     }
 
+    /**
+     *
+     * @param visible
+     */
     public void setVisible(boolean visible) {
         this.visible = visible;
     }
