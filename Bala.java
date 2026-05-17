@@ -25,7 +25,7 @@ public class Bala extends ElementoGrafico {
         this.canvas = entrada.getCanvas();
         super.setVelocidad(10);
         super.setAnchura(1);
-        super.setAltura(4);
+        super.setAltura(6);
     }
 
     /**

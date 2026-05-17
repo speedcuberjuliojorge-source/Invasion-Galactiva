@@ -26,11 +26,11 @@ public class NaveRebelde extends ElementoGrafico {
         super.setX((int) (canvas.pideLimiteXMax() / 2) - 2);
         super.setY((int) (canvas.pideLimiteYMin() + 14));
         this.canvas = canvas;
-        super.setVelocidad(5);
+        super.setVelocidad(3);
         setVisible(true);
         setContaCiclos(1);
-        super.setAltura(4);
-        super.setAnchura(15);
+        super.setAltura(27);
+        super.setAnchura(6);
     }
 
     /**
@@ -43,24 +43,16 @@ public class NaveRebelde extends ElementoGrafico {
         //Mover la nave
         if (getCanvas().fuePulsadaTecla(KeyEvent.VK_A) || getCanvas().fuePulsadaTecla(KeyEvent.VK_LEFT)) {
             if (getX() > (getCanvas().pideLimiteXMin() + velocidad)) {
-                if (getCanvas().existenMasTeclasPulsadas()) {
-                    if (getX() > (getCanvas().pideLimiteXMin() + velocidad))/*Se suma el 5 para obtener el
-            limite del canvas 0*/ {
-                        setX(getX() - velocidad);
-                    }
-                }
+                setX(getX() - velocidad);
 
             }
         }
 
         if (getCanvas().fuePulsadaTecla(KeyEvent.VK_D) || getCanvas().fuePulsadaTecla(KeyEvent.VK_RIGHT)) {
             if (getX() < (getCanvas().pideLimiteXMax() - velocidad)) {
-                if (getCanvas().existenMasTeclasPulsadas()) {
-                    if (getX() < (getCanvas().pideLimiteXMax() - velocidad))/*Se suma el 5 para obtener el
-            limite del canvas 0*/ {
-                        setX(getX() + velocidad);
-                    }
-                }
+
+                setX(getX() + velocidad);
+
             }
         }
 
@@ -71,7 +63,7 @@ public class NaveRebelde extends ElementoGrafico {
             if (getCanvas().fuePulsadaTecla(KeyEvent.VK_SPACE)) {
                 e.getBalas()[i].setVisible(true);
                 if (getContaCiclos() == 1) {
-                    e.getBalas()[i].mueveInicio(0, 10, this);
+                    e.getBalas()[i].mueveInicio(0, -10, this);
                 }
 
             }

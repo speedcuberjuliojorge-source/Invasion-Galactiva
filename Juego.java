@@ -77,12 +77,12 @@ public class Juego {
                 canvas.dibujo(getElemento()[i].getX(), getElemento()[i].getY(), getElemento()[i].getImgSprite());
             }
         }
-
         for (int i = 0; i < getBalas().length; i++) {
             if (getBalas()[i].isVisible() == true) {
                 canvas.dibujo(getBalas()[i].getX(), getBalas()[i].getY(), getBalas()[i].getImgSprite());
             }
         }
+        bala.setVisible(true);
         canvas.mostrar(0);
     }
 
