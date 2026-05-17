@@ -1,6 +1,7 @@
 
 import edu.epromero.util.Imagen;
 import edu.epromero.util.Lienzo;
+import java.awt.Color;
 import static java.lang.Thread.sleep;
 
 /**
@@ -142,33 +143,20 @@ public class Destructor extends NaveEnemiga {
         return contador > 1;
     }*/
     public boolean hayColision(Entrada e) {
-        int contador = 0;
-        int limitecx = (e.getHeroe().getX() - (e.getHeroe().getAnchura() / 2)) + (e.getHeroe().getAnchura()) - 3;
-        System.out.println(limitecx);
-        int limitecy = (e.getHeroe().getY() - (e.getHeroe().getAltura() / 2)) + (e.getHeroe().getAltura()) - 1;
-        System.out.println(limitecy);
-        int neocx = (e.getHeroe().getX() - (e.getHeroe().getAnchura() / 2)) + 1;
-        System.out.println(neocx);
-        int neocy = (e.getHeroe().getY() - (e.getHeroe().getAltura() / 2));
-        System.out.println(neocy);
-        for (neocy = neocy; neocy <= limitecy; neocy++) {
-            for (neocx = e.getHeroe().getX(); neocx <= limitecx; neocx++) {
+        int limiteDerH = e.getHeroe().getX() + e.getHeroe().getAnchura() / 2;
+        int limiteIzqH = e.getHeroe().getX() - e.getHeroe().getAnchura() / 2;
+        int limiteUpH = e.getHeroe().getY() + e.getHeroe().getAltura() / 2;
+        int limiteDwH = e.getHeroe().getY() - e.getHeroe().getAltura() / 2;
 
-                for (int i = 0; i < e.getBalas()[1].getAltura(); i++) {//Si i < alto de imagen del objeto
-                    for (int j = 0; j < e.getBalas()[1].getAnchura(); j++) {//Si j < ancho de imagen del objeto
-                        int sumacY = (e.getBalas()[1].getY() - (e.getBalas()[1].getAltura() / 2)) + i;//coordenada y de esq. inf. izq. de imagen del objeto
-                        System.out.println(e.getBalas()[1].getY() - (e.getBalas()[1].getAltura() / 2));
-                        int sumacX = (e.getBalas()[1].getX() - (e.getBalas()[1].getAnchura() / 2)) + j;//coordenada y de esq. inf. izq. de imagen del objeto
-                        System.out.println(e.getBalas()[1].getX() - (e.getBalas()[1].getAnchura() / 2));
-                        if (sumacY == (neocy) && sumacX == (neocx)) {
-                            contador++;
-                        }
+        int limiteDerD = e.getBalas()[1].getX() + e.getBalas()[1].getAnchura() / 2;
+        int limiteIzqD = e.getBalas()[1].getX() - e.getBalas()[1].getAnchura() / 2;
+        int limiteUpD = e.getBalas()[1].getY() + e.getBalas()[1].getAltura() / 2;
+        int limiteDwD = e.getBalas()[1].getY() - e.getBalas()[1].getAltura() / 2;
 
-                    }
-                }
-            }
-        }
-        return contador > 1;
+        boolean colisionX = limiteUpH <= limiteDerD && limiteDerH >= limiteIzqD;
+        boolean colisionY = limiteUpD <= limiteDwD && limiteDwH >= limiteUpD;
+
+        return colisionX && colisionY;
     }
 
     /**
