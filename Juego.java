@@ -71,6 +71,7 @@ public class Juego {
      * Dibuja todos los elementos graficos del programa en el lienzo
      */
     public void dibuja() {
+
         canvas.dibujo((canvas.pideLimiteXMax() / 2), (canvas.pideLimiteYMax() / 2), getElemento()[0].getImgSprite(), 1000, 650);
         for (int i = 1; i < getElemento().length; i++) {
             if (getElemento()[i].isVisible() == true) {
@@ -83,6 +84,7 @@ public class Juego {
             }
         }
         bala.setVisible(true);
+        fondo.pintaDatos(canvas, entrada);
         canvas.mostrar(0);
     }
 

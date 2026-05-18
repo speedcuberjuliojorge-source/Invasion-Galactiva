@@ -79,6 +79,7 @@ public class Destructor extends NaveEnemiga {
             if (e.getBalas()[1].isVisible()) {
                 boolean choque = hayColision(e);
                 if (choque == true) {
+                    e.getHeroe().setVidas(e.getHeroe().getVidas() - 1);
                     try {
                         sleep(1000);
                     } catch (InterruptedException ex) {

@@ -1,4 +1,8 @@
 
+import edu.epromero.util.Lienzo;
+import java.awt.Color;
+import java.awt.Font;
+
 /**
  * Clase Fondo, hereda de ElementoGrafico y define el fondo
  *
@@ -26,6 +30,13 @@ public class Fondo extends ElementoGrafico {
         super.imagen(sprite);
         super.setVisible(true);
 
+    }
+
+    public void pintaDatos(Lienzo canvas, Entrada entrada) {
+        Font fuente = new Font("Arial", Font.BOLD, 36); //Crea una fuente con tipo de letra, tipografia y tamaño
+        canvas.ponFuente(fuente); //Estableze la fuente al canvas
+        canvas.ponColorLapiz(Color.CYAN); //Establece el color del lapiz
+        canvas.texto(canvas.pideLimiteXMin() + 8, canvas.pideLimiteYMin() + 8, "Vidas: " + entrada.getHeroe().getVidas());
     }
 
     //Setters y Getters

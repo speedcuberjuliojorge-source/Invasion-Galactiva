@@ -13,6 +13,7 @@ public class NaveRebelde extends ElementoGrafico {
     private boolean visible;
     private Lienzo canvas;
     private int contaCiclos;
+    private int vidas;
 
     /**
      * Constructor, define el lienzo
@@ -31,6 +32,7 @@ public class NaveRebelde extends ElementoGrafico {
         setContaCiclos(1);
         super.setAltura(27);
         super.setAnchura(6);
+        setVidas(1);
     }
 
     /**
@@ -140,6 +142,20 @@ public class NaveRebelde extends ElementoGrafico {
      */
     public void setContaCiclos(int contaCiclos) {
         this.contaCiclos = contaCiclos;
+    }
+
+    /**
+     * @return the vidas
+     */
+    public int getVidas() {
+        return vidas;
+    }
+
+    /**
+     * @param vidas the vidas to set
+     */
+    public void setVidas(int vidas) {
+        this.vidas = vidas;
     }
 
 }
