@@ -24,6 +24,8 @@ public class Bala extends ElementoGrafico {
         super.setY(nave.getY());
         this.canvas = entrada.getCanvas();
         super.setVelocidad(10);
+        super.setAnchura(1);
+        super.setAltura(6);
     }
 
     /**
@@ -54,6 +56,8 @@ public class Bala extends ElementoGrafico {
         super.setY(nave.getY());
         this.canvas = entrada.getCanvas();
         super.setVelocidad(10);
+        super.setAltura(2);
+        super.setAnchura(4);
     }
 
     /**
@@ -79,7 +83,6 @@ public class Bala extends ElementoGrafico {
     public void mueve(int x, int y) {
         setX(getX() + x);
         setY(getY() + y);
-        System.out.println("Coordenadas bala: " + "(" + getX() + ", " + getY() + ")");
     }
 
     /**

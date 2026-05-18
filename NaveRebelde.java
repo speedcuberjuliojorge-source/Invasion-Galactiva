@@ -26,9 +26,11 @@ public class NaveRebelde extends ElementoGrafico {
         super.setX((int) (canvas.pideLimiteXMax() / 2) - 2);
         super.setY((int) (canvas.pideLimiteYMin() + 14));
         this.canvas = canvas;
-        super.setVelocidad(5);
+        super.setVelocidad(3);
         setVisible(true);
         setContaCiclos(1);
+        super.setAltura(27);
+        super.setAnchura(6);
     }
 
     /**
@@ -37,26 +39,20 @@ public class NaveRebelde extends ElementoGrafico {
      * @param e
      */
     public void mueve(Entrada e) {
+
+        //Mover la nave
         if (getCanvas().fuePulsadaTecla(KeyEvent.VK_A) || getCanvas().fuePulsadaTecla(KeyEvent.VK_LEFT)) {
             if (getX() > (getCanvas().pideLimiteXMin() + velocidad)) {
-                if (getCanvas().existenMasTeclasPulsadas()) {
-                    if (getX() > (getCanvas().pideLimiteXMin() + velocidad))/*Se suma el 5 para obtener el
-            limite del canvas 0*/ {
-                        setX(getX() - velocidad);
-                    }
-                }
+                setX(getX() - velocidad);
 
             }
         }
 
         if (getCanvas().fuePulsadaTecla(KeyEvent.VK_D) || getCanvas().fuePulsadaTecla(KeyEvent.VK_RIGHT)) {
             if (getX() < (getCanvas().pideLimiteXMax() - velocidad)) {
-                if (getCanvas().existenMasTeclasPulsadas()) {
-                    if (getX() < (getCanvas().pideLimiteXMax() - velocidad))/*Se suma el 5 para obtener el
-            limite del canvas 0*/ {
-                        setX(getX() + velocidad);
-                    }
-                }
+
+                setX(getX() + velocidad);
+
             }
         }
 
@@ -64,10 +60,10 @@ public class NaveRebelde extends ElementoGrafico {
         //La i se inicializa en el indice donde inican las balas del destructor
         //y  terminan donde el indice inica las balas de otro enemigo
         for (int i = 0; i < 1; i++) {
-            if (getCanvas().fuePulsadaTecla(KeyEvent.VK_SPACE) /*&& (e.getBala2().getY() == getY())*/) {
+            if (getCanvas().fuePulsadaTecla(KeyEvent.VK_SPACE)) {
                 e.getBalas()[i].setVisible(true);
                 if (getContaCiclos() == 1) {
-                    e.getBalas()[i].mueveInicio(0, 0, this);
+                    e.getBalas()[i].mueveInicio(0, -10, this);
                 }
 
             }
@@ -82,6 +78,7 @@ public class NaveRebelde extends ElementoGrafico {
 
         }
         setContaCiclos(getContaCiclos() + 1);
+
     }
 
     //Getters & Setters

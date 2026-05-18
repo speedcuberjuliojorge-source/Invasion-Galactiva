@@ -15,6 +15,8 @@ public class ElementoGrafico {
     protected String sprite;
     protected Imagen imgSprite;
     protected int velocidad;
+    private int altura;
+    private int anchura;
 
     /**
      * Constructor de clase
@@ -27,6 +29,8 @@ public class ElementoGrafico {
         sprite = "";
         imgSprite = null;
         velocidad = 0;
+        altura = 0;
+        anchura = 0;
     }
 
     /**
@@ -156,6 +160,34 @@ public class ElementoGrafico {
      */
     public void setVelocidad(int velocidad) {
         this.velocidad = velocidad;
+    }
+
+    /**
+     * @return the altura
+     */
+    public int getAltura() {
+        return altura;
+    }
+
+    /**
+     * @param altura the altura to set
+     */
+    public void setAltura(int altura) {
+        this.altura = altura;
+    }
+
+    /**
+     * @return the anchura
+     */
+    public int getAnchura() {
+        return anchura;
+    }
+
+    /**
+     * @param anchura the anchura to set
+     */
+    public void setAnchura(int anchura) {
+        this.anchura = anchura;
     }
 
 }

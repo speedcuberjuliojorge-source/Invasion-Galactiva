@@ -13,6 +13,7 @@ public class Entrada {
     private Bala bala2;
     private Destructor destructor;
     private Bala balas[];
+    private NaveRebelde heroe;
 
     /**
      * Constructor, define el arreglo de balas
@@ -104,6 +105,20 @@ public class Entrada {
      */
     public void setBalas(Bala[] balas) {
         this.balas = balas;
+    }
+
+    /**
+     * @return the heroe
+     */
+    public NaveRebelde getHeroe() {
+        return heroe;
+    }
+
+    /**
+     * @param heroe the heroe to set
+     */
+    public void setHeroe(NaveRebelde heroe) {
+        this.heroe = heroe;
     }
 
 }

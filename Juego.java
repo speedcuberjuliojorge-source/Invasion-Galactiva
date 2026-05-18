@@ -42,12 +42,13 @@ public class Juego {
         fondo = new Fondo(canvas.pideLimiteXMax(), canvas.pideLimiteYMax());
         elemento[0] = fondo;
 
+        //Mover Entrada
+        entrada = new Entrada(canvas);
+
         //Estabecer Nave
         heroe = new NaveRebelde(canvas);
         elemento[1] = heroe;
-
-        //Mover Entrada
-        entrada = new Entrada(canvas);
+        entrada.setHeroe((NaveRebelde) (elemento[1]));
 
         //Pintar Destructor
         destructor = new Destructor(canvas);
@@ -60,7 +61,7 @@ public class Juego {
         bala = new Bala(entrada, destructor);
         balas[0] = bala;
 
-        bala2 = new Bala(entrada, destructor);
+        bala2 = new Bala(entrada, heroe);
         balas[1] = bala2;
         entrada.setBalas(balas);
 
@@ -76,12 +77,12 @@ public class Juego {
                 canvas.dibujo(getElemento()[i].getX(), getElemento()[i].getY(), getElemento()[i].getImgSprite());
             }
         }
-
         for (int i = 0; i < getBalas().length; i++) {
             if (getBalas()[i].isVisible() == true) {
                 canvas.dibujo(getBalas()[i].getX(), getBalas()[i].getY(), getBalas()[i].getImgSprite());
             }
         }
+        bala.setVisible(true);
         canvas.mostrar(0);
     }
 

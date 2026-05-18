@@ -1,5 +1,6 @@
 
 import edu.epromero.util.Lienzo;
+import static java.lang.Thread.sleep;
 
 /**
  * Clase Destructor, hereda de NaveEnemiga
@@ -24,8 +25,10 @@ public class Destructor extends NaveEnemiga {
         super.setSprite(".\\resources\\Destructor.png");
         super.imagen(sprite);
         derDestructor = true;
-        super.setVelocidad(15);
+        super.setVelocidad(3);
         setContaCiclos(1);
+        super.setAnchura(6);
+        super.setAltura(10);
     }
 
     /**
@@ -34,6 +37,7 @@ public class Destructor extends NaveEnemiga {
      * @param e
      */
     public void mueve(Entrada e) {
+        //Mover destructor
         if (getX() >= (canvas.pideLimiteXMin() + velocidad) && isDerDestructor() == true) {
             if (!(getX() < (canvas.pideLimiteXMin() - velocidad))) {
                 setX(getX() - velocidad);
@@ -50,18 +54,20 @@ public class Destructor extends NaveEnemiga {
             }
 
         }
+        //Disparar
+
         //La i se inicializa en el indice donde inican las balas del destructor
         //y  terminan donde el indice inica las balas de otro enemigo
         for (int i = 1; i < 2; i++) {
-            if (getContaCiclos() % 2 == 0) {
+            if (getContaCiclos() % 8 == 0) {
                 e.getBalas()[i].setVisible(true);
-                if (getContaCiclos() == 2) {
-                    e.getBalas()[i].mueveInicio(0, -10, this);
+                if (getContaCiclos() == 8) {
+                    e.getBalas()[i].mueveInicio(0, -5, this);
                 }
 
             }
             if (e.getBalas()[i].isVisible() == true) {
-                e.getBalas()[i].mueve(0, -10);
+                e.getBalas()[i].mueve(0, -5);
             }
 
             if (e.getBalas()[i].getY() < 0 && e.getBalas()[i].isVisible()) {
@@ -69,8 +75,42 @@ public class Destructor extends NaveEnemiga {
                 setContaCiclos(0);
             }
 
+            //verificar choque
+            if (e.getBalas()[1].isVisible()) {
+                boolean choque = hayColision(e);
+                if (choque == true) {
+                    try {
+                        sleep(1000);
+                    } catch (InterruptedException ex) {
+                        System.getLogger(Destructor.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                    }
+                }
+            }
         }
         setContaCiclos(getContaCiclos() + 1);
+    }
+
+    /**
+     * Motor de colision hero-bala
+     *
+     * @param e
+     * @return
+     */
+    public boolean hayColision(Entrada e) {
+        double limiteDerH = (e.getHeroe().getX() + e.getHeroe().getAnchura() / 2) - 3.09;
+        double limiteIzqH = (e.getHeroe().getX() - e.getHeroe().getAnchura() / 2) + 3.09;
+        double limiteUpH = (e.getHeroe().getY() + e.getHeroe().getAltura() / 2) - 1;
+        double limiteDwH = (e.getHeroe().getY() - e.getHeroe().getAltura() / 2) + 1;
+
+        double limiteDerD = e.getBalas()[1].getX() + e.getBalas()[1].getAnchura() / 2;
+        double limiteIzqD = e.getBalas()[1].getX() - e.getBalas()[1].getAnchura() / 2;
+        double limiteUpD = e.getBalas()[1].getY() + e.getBalas()[1].getAltura() / 2;
+        double limiteDwD = e.getBalas()[1].getY() - e.getBalas()[1].getAltura() / 2;
+
+        boolean colisionX = limiteIzqH <= limiteDerD && limiteDerH >= limiteIzqD;
+        boolean colisionY = limiteDwH <= limiteUpD && limiteUpH >= limiteDwD;
+
+        return colisionX && colisionY;
     }
 
     /**
