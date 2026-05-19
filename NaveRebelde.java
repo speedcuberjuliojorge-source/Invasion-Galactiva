@@ -27,12 +27,13 @@ public class NaveRebelde extends ElementoGrafico {
         super.setX((int) (canvas.pideLimiteXMax() / 2) - 2);
         super.setY((int) (canvas.pideLimiteYMin() + 14));
         this.canvas = canvas;
-        super.setVelocidad(3);
+        super.setVelocidad(2);
         setVisible(true);
         setContaCiclos(1);
         super.setAltura(27);
         super.setAnchura(6);
-        setVidas(1);
+        setVidas(3);
+
     }
 
     /**
@@ -61,16 +62,20 @@ public class NaveRebelde extends ElementoGrafico {
         //Disparar
         //La i se inicializa en el indice donde inican las balas del destructor
         //y  terminan donde el indice inica las balas de otro enemigo
-        for (int i = 0; i < 1; i++) {
-            if (getCanvas().fuePulsadaTecla(KeyEvent.VK_SPACE)) {
+        for (int i = 1; i < 2; i++) {
+
+            if (getCanvas().fuePulsadaTecla(KeyEvent.VK_SPACE) && (e.getBalas()[1].getY() >= e.getDestructor().getLimiteMaxXCanvas() || e.getBalas()[i].getY() == this.getY())) {
                 e.getBalas()[i].setVisible(true);
+                e.getBalas()[i].setX(this.getX());
+                e.getBalas()[i].setY(this.getY());
+
                 if (getContaCiclos() == 1) {
-                    e.getBalas()[i].mueveInicio(0, -10, this);
+                    e.getBalas()[i].mueveInicio(0, 5, this);
                 }
 
             }
             if (e.getBalas()[i].isVisible() == true) {
-                e.getBalas()[i].mueve(0, 10);
+                e.getBalas()[i].mueve(0, 5);
             }
 
             if (e.getBalas()[i].getY() > 100 && e.getBalas()[i].isVisible()) {

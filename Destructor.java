@@ -25,7 +25,7 @@ public class Destructor extends NaveEnemiga {
         super.setSprite(".\\resources\\Destructor.png");
         super.imagen(sprite);
         derDestructor = true;
-        super.setVelocidad(3);
+        super.setVelocidad(1);
         setContaCiclos(1);
         super.setAnchura(6);
         super.setAltura(10);
@@ -58,10 +58,10 @@ public class Destructor extends NaveEnemiga {
 
         //La i se inicializa en el indice donde inican las balas del destructor
         //y  terminan donde el indice inica las balas de otro enemigo
-        for (int i = 1; i < 2; i++) {
-            if (getContaCiclos() % 8 == 0) {
+        for (int i = 0; i < 1; i++) {
+            if (getContaCiclos() % 2 == 0) {
                 e.getBalas()[i].setVisible(true);
-                if (getContaCiclos() == 8) {
+                if (getContaCiclos() == 2) {
                     e.getBalas()[i].mueveInicio(0, -5, this);
                 }
 
@@ -76,10 +76,20 @@ public class Destructor extends NaveEnemiga {
             }
 
             //verificar choque
-            if (e.getBalas()[1].isVisible()) {
+            if (e.getBalas()[0].isVisible()) {
                 boolean choque = hayColision(e);
                 if (choque == true) {
                     e.getHeroe().setVidas(e.getHeroe().getVidas() - 1);
+                    try {
+                        sleep(500);
+                    } catch (InterruptedException ex) {
+                        System.getLogger(Destructor.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+                    }
+                }
+            }
+            if (e.getBalas()[1].isVisible()) {
+                boolean choque = hayColisionPropia(e);
+                if (choque == true) {
                     try {
                         sleep(1000);
                     } catch (InterruptedException ex) {
@@ -103,13 +113,30 @@ public class Destructor extends NaveEnemiga {
         double limiteUpH = (e.getHeroe().getY() + e.getHeroe().getAltura() / 2) - 1;
         double limiteDwH = (e.getHeroe().getY() - e.getHeroe().getAltura() / 2) + 1;
 
-        double limiteDerD = e.getBalas()[1].getX() + e.getBalas()[1].getAnchura() / 2;
-        double limiteIzqD = e.getBalas()[1].getX() - e.getBalas()[1].getAnchura() / 2;
-        double limiteUpD = e.getBalas()[1].getY() + e.getBalas()[1].getAltura() / 2;
-        double limiteDwD = e.getBalas()[1].getY() - e.getBalas()[1].getAltura() / 2;
+        double limiteDerD = e.getBalas()[0].getX() + e.getBalas()[1].getAnchura() / 2;
+        double limiteIzqD = e.getBalas()[0].getX() - e.getBalas()[1].getAnchura() / 2;
+        double limiteUpD = e.getBalas()[0].getY() + e.getBalas()[1].getAltura() / 2;
+        double limiteDwD = e.getBalas()[0].getY() - e.getBalas()[1].getAltura() / 2;
 
         boolean colisionX = limiteIzqH <= limiteDerD && limiteDerH >= limiteIzqD;
         boolean colisionY = limiteDwH <= limiteUpD && limiteUpH >= limiteDwD;
+
+        return colisionX && colisionY;
+    }
+
+    public boolean hayColisionPropia(Entrada e) {
+        double thisLimiteDer = getX() + (this.getAnchura() / 2);
+        double thisLimiteIzq = getX() - (this.getAnchura() / 2);
+        double thisLimiteUp = getY() + (this.getAltura() / 2);
+        double thisLimiteDw = getY() - (this.getAltura() / 2) + 6;
+
+        double limiteDerD = e.getBalas()[1].getX() + e.getBalas()[1].getAnchura() / 2;
+        double limiteIzqD = e.getBalas()[1].getX() - e.getBalas()[1].getAnchura() / 2;
+        double limiteUpD = e.getBalas()[1].getY() + (e.getBalas()[1].getAltura() / 2) + 1;
+        double limiteDwD = e.getBalas()[1].getY() - e.getBalas()[1].getAltura() / 2;
+
+        boolean colisionX = thisLimiteIzq <= limiteDerD && thisLimiteDer >= limiteIzqD;
+        boolean colisionY = thisLimiteUp >= limiteDwD && thisLimiteDw <= limiteUpD;
 
         return colisionX && colisionY;
     }

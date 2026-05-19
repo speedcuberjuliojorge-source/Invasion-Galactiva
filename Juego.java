@@ -58,10 +58,9 @@ public class Juego {
         elemento[3] = d2;*/
 
         //Iniciar Bala
-        bala = new Bala(entrada, destructor);
+        bala = new Bala(entrada, (NaveEnemiga) (elemento[2]));
         balas[0] = bala;
-
-        bala2 = new Bala(entrada, heroe);
+        bala2 = new Bala(entrada, (NaveRebelde) (elemento[1]));
         balas[1] = bala2;
         entrada.setBalas(balas);
 
@@ -73,6 +72,7 @@ public class Juego {
     public void dibuja() {
 
         canvas.dibujo((canvas.pideLimiteXMax() / 2), (canvas.pideLimiteYMax() / 2), getElemento()[0].getImgSprite(), 1000, 650);
+
         for (int i = 1; i < getElemento().length; i++) {
             if (getElemento()[i].isVisible() == true) {
                 canvas.dibujo(getElemento()[i].getX(), getElemento()[i].getY(), getElemento()[i].getImgSprite());
@@ -83,7 +83,6 @@ public class Juego {
                 canvas.dibujo(getBalas()[i].getX(), getBalas()[i].getY(), getBalas()[i].getImgSprite());
             }
         }
-        bala.setVisible(true);
         fondo.pintaDatos(canvas, entrada);
         canvas.mostrar(0);
     }
