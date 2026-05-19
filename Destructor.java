@@ -59,9 +59,9 @@ public class Destructor extends NaveEnemiga {
         //La i se inicializa en el indice donde inican las balas del destructor
         //y  terminan donde el indice inica las balas de otro enemigo
         for (int i = 0; i < 1; i++) {
-            if (getContaCiclos() % 2 == 0) {
+            if (getContaCiclos() % 13 == 0 && getContaCiclos() != 1) {
                 e.getBalas()[i].setVisible(true);
-                if (getContaCiclos() == 2) {
+                if (getContaCiclos() == 13) {
                     e.getBalas()[i].mueveInicio(0, -5, this);
                 }
 
@@ -72,29 +72,31 @@ public class Destructor extends NaveEnemiga {
 
             if (e.getBalas()[i].getY() < 0 && e.getBalas()[i].isVisible()) {
                 e.getBalas()[i].setVisible(false);
-                setContaCiclos(0);
+                setContaCiclos(1);
             }
 
-            //verificar choque
+            //verificar que se le disparo al heroe
             if (e.getBalas()[0].isVisible()) {
                 boolean choque = hayColision(e);
                 if (choque == true) {
                     e.getHeroe().setVidas(e.getHeroe().getVidas() - 1);
-                    try {
-                        sleep(500);
-                    } catch (InterruptedException ex) {
-                        System.getLogger(Destructor.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-                    }
+                    e.getBalas()[0].setX(getX());
+                    e.getBalas()[0].setY(getY());
+                    this.setContaCiclos(1);
+                    e.getBalas()[0].setVisible(false);
                 }
             }
+            //verifica si le han disparado al destructor
             if (e.getBalas()[1].isVisible()) {
                 boolean choque = hayColisionPropia(e);
                 if (choque == true) {
-                    try {
-                        sleep(1000);
-                    } catch (InterruptedException ex) {
-                        System.getLogger(Destructor.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
-                    }
+                    setX((int) (Math.random() * (limiteMaxXCanvas - limiteMinXCanvas)));
+                    setY((int) ((Math.random() + 0.64) * (limiteMaxYCanvas - limiteMinYCanvas)));
+                    this.setContaCiclos(1);
+                    e.getBalas()[1].setVisible(false);
+                    e.getBalas()[1].setX(e.getHeroe().getX());
+                    e.getBalas()[1].setY(e.getHeroe().getY());
+                    e.getHeroe().setPuntos(e.getHeroe().getPuntos() + this.getPuntosAlMorir());
                 }
             }
         }

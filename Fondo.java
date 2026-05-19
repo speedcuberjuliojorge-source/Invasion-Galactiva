@@ -35,8 +35,9 @@ public class Fondo extends ElementoGrafico {
     public void pintaDatos(Lienzo canvas, Entrada entrada) {
         Font fuente = new Font("Arial", Font.BOLD, 36); //Crea una fuente con tipo de letra, tipografia y tamaño
         canvas.ponFuente(fuente); //Estableze la fuente al canvas
-        canvas.ponColorLapiz(Color.CYAN); //Establece el color del lapiz
+        canvas.ponColorLapiz(Color.RED); //Establece el color del lapiz
         canvas.texto(canvas.pideLimiteXMin() + 8, canvas.pideLimiteYMin() + 8, "Vidas: " + entrada.getHeroe().getVidas());
+        canvas.texto(canvas.pideLimiteXMax() - 8, canvas.pideLimiteYMin() + 8, "Puntos: " + entrada.getHeroe().getPuntos());
     }
 
     //Setters y Getters
